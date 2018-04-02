@@ -9,7 +9,7 @@ Alright, so we have procrastinated this for awhile. There's nothing saying we wo
 
 ## __Todo__:
 ###### * [] Make corrections to report
-* [] Grammar/wording issues
+* [x] Grammar/wording issues
 * [] Schema corrections 
 * [] Relational schema corrections
 * [] Integrity constraints
