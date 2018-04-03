@@ -8,37 +8,37 @@ Alright, so we have procrastinated this for awhile. There's nothing saying we wo
 ###### 4/7, 4/8, 4/9, 4/14, 4/15, 4/16
 
 ## __Todo__:
-###### * [] Make corrections to report
+* [ ] Make corrections to report
 * [x] Grammar/wording issues
 * [ ] Schema corrections 
 * [ ] Relational schema corrections
 * [ ] Integrity constraints
 
-###### * [] Build database 
-* [ ] Tables (Complex, Building, Room, Employee, Tenant)
-* [ ] Attributes within each table (see PDF in repo)
-* [ ] Populate with sample data
+* [ ] Build database 
+	* [ ] Tables (Complex, Building, Room, Employee, Tenant)
+	* [ ] Attributes within each table (see PDF in repo)
+	* [ ] Populate with sample data
 
-###### * [ ] Queries
-* [ ] A join involving at least four relations.
-* [ ] A self-join.
-* [ ] UNION, INTERSECT, and/or MINUS.
-* [ ] SUM, AVG, MAX, and/or MIN.
-* [ ] GROUP BY, HAVING, and ORDER BY, all appearing in the same query
-* [ ] A correlated subquery.
-* [ ] A non-correlated subquery.
-* [ ] A relational DIVISION query.
-* [ ] An outer join query.
-* [ ] A RANK query.
-* [ ] A Top-N query.
+* [ ] Cover page
+	* [ ] A join involving at least four relations.
+	* [ ] A self-join.
+	* [ ] UNION, INTERSECT, and/or MINUS.
+	* [ ] SUM, AVG, MAX, and/or MIN.
+	* [ ] GROUP BY, HAVING, and ORDER BY, all appearing in the same query
+	* [ ] A correlated subquery.
+	* [ ] A non-correlated subquery.
+	* [ ] A relational DIVISION query.
+	* [ ] An outer join query.
+	* [ ] A RANK query.
+	* [ ] A Top-N query.
 
 
-###### * [] Combine queries 
-* [ ] Put all queries into one file like the homework and name it 'project.sql'
-* [ ] Run project.sql
-* [ ] __Change font size to 9__ 
-* [ ] Print with __single sided printing__
-* [ ] Label them __by hand__ A1, A2, A3, ... and attach them as an appendix to the final report. 
+* [ ] Combine queries 
+	* [ ] Put all queries into one file like the homework and name it 'project.sql'
+	* [ ] Run project.sql
+	* [ ] __Change font size to 9__ 
+	* [ ] Print with __single sided printing__
+	* [ ] Label them __by hand__ A1, A2, A3, ... and attach them as an appendix to the final report. 
 
 ## Final Report
 * [ ] Cover page
