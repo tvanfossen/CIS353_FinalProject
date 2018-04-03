@@ -19,7 +19,7 @@ Alright, so we have procrastinated this for awhile. There's nothing saying we wo
 * [ ] Attributes within each table (see PDF in repo)
 * [ ] Populate with sample data
 
-###### * [] Queries
+###### * [ ] Queries
 * [ ] A join involving at least four relations.
 * [ ] A self-join.
 * [ ] UNION, INTERSECT, and/or MINUS.
