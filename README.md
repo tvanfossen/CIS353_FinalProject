@@ -8,16 +8,16 @@ Alright, so we have procrastinated this for awhile. There's nothing saying we wo
 ###### 4/7, 4/8, 4/9, 4/14, 4/15, 4/16
 
 ## __Todo__:
-* [ ] Make corrections to report
+* [x] Make corrections to report
 * [x] Grammar/wording issues
-* [ ] Schema corrections 
+* [x] Schema corrections 
 * [ ] Relational schema corrections
 * [ ] Integrity constraints
 
-* [ ] Build database 
-	* [ ] Tables (Complex, Building, Room, Employee, Tenant)
-	* [ ] Attributes within each table (see PDF in repo)
-	* [ ] Populate with sample data
+* [x] Build database 
+	* [x] Tables (Complex, Building, Room, Employee, Tenant)
+	* [x] Attributes within each table (see PDF in repo)
+	* [x] Populate with sample data
 
 * [ ] Queries
 	* [ ] A join involving at least four relations.
