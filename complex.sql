@@ -42,17 +42,29 @@ CREATE TABLE Building
 		CONSTRAINT Constraint6 CHECK (REGEXP_LIKE(managerSSN, '^[[:digit:]]{9}$'))
 );
 
+
+CREATE TABLE Style
+(
+        type CHAR(20) PRIMARY KEY,	
+        numBedrooms INTEGER,
+--                CONSTRAINT Constraint10 PRIMARY KEY (type, numBedrooms),
+                CONSTRAINT Constraint11 CHECK (numBedrooms >= 1 AND numBedrooms <=2),
+        squareFeet INTEGER
+);
+
+
 CREATE TABLE Unit
 (
-	uNum VARCHAR(10),
+	uNum VARCHAR(10) PRIMARY KEY,
 	complexID INTEGER,
-		CONSTRAINT Constraint8 PRIMARY KEY (uNum, complexID),
+--		CONSTRAINT Constraint8 PRIMARY KEY (uNum, complexID),
 	bNum INTEGER,
 		CONSTRAINT ForeignKey3 FOREIGN KEY (bNum, complexID) REFERENCES Building(bNum, complexID)
 			ON DELETE CASCADE, --idk if this is right
 	styleType CHAR(20) NOT NULL,
 		CONSTRAINT ForeignKey4 FOREIGN KEY (styleType) REFERENCES Style(type)
-			ON DELETE CASCADE, --idk if this is right
+			ON DELETE CASCADE --idk if this is right
+			DEFERRABLE INITIALLY DEFERRED,	
 		CONSTRAINT Constraint9 CHECK (styleType IN ('Loft', 'Flat', 'Studio')),
 	price INTEGER NOT NULL
 );
@@ -64,22 +76,15 @@ CREATE TABLE Tenant
 	lName CHAR(20) NOT NULL, 
 	fName CHAR(20) NOT NULL, 
 	dateOfBirth DATE,
-	uNum INTEGER NOT NULL,
+	uNum VARCHAR(10) NOT NULL,
+	--uNum INTEGER NOT NULL,
 		CONSTRAINT ForeignKey5 FOREIGN KEY (uNum) REFERENCES Unit(uNum)
-			ON DELETE CASCADE, --idk if this is right
+			ON DELETE CASCADE --idk if this is right
+			DEFERRABLE INITIALLY DEFERRED,
 	leaseEndDate DATE NOT NULL 
 );
 
-CREATE TABLE Style
-(
-	type CHAR(20),
-	numBedrooms INTEGER,
-		CONSTRAINT Constraint10 PRIMARY KEY (type, numBedrooms),
-		CONSTRAINT Constraint11 CHECK (numBedrooms >= 1 AND numBedrooms <=2),
-	squareFeet INTEGER
-);
-
-SET AUTOCOMMIT 
+SET AUTOCOMMIT ON
 
 -- INSERT INTO Complex VALUES (1, '123 Division Ave', 'Applewood');
 -- INSERT INTO Complex VALUES (2, '4987 48th Ave', 'Orangewood');
