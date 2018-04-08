@@ -26,7 +26,8 @@ CREATE TABLE Employee
 		CONSTRAINT Constraint3 CHECK (salary >= 20000 AND salary <= 150000),
 	complexID INTEGER NOT NULL,
 		CONSTRAINT ForeignKey1 FOREIGN KEY (complexID) REFERENCES Complex(id)
-			ON DELETE CASCADE,
+			ON DELETE CASCADE
+			DEFERRABLE INITIALLY DEFERRED,
 		CONSTRAINT Constraint4 CHECK (complexID >= 1 AND complexID <= 3),
 	homeAddress CHAR(30) NOT NULL
 );
@@ -36,24 +37,36 @@ CREATE TABLE Building
 	bNum INTEGER,
 	complexID INTEGER,
 		CONSTRAINT ForeignKey2 FOREIGN KEY (complexID) REFERENCES Complex(id)
-			ON DELETE CASCADE,
+			ON DELETE CASCADE
+			DEFERRABLE INITIALLY DEFERRED,
 		CONSTRAINT Constraint5 PRIMARY KEY (bNum, complexID),
 	managerSSN VARCHAR(9), 
 		CONSTRAINT Constraint6 CHECK (REGEXP_LIKE(managerSSN, '^[[:digit:]]{9}$'))
 );
 
+CREATE TABLE Style
+(
+	type CHAR(20),
+	numBedrooms INTEGER,
+		CONSTRAINT Constraint10 PRIMARY KEY (type, numBedrooms),
+		CONSTRAINT Constraint11 CHECK (numBedrooms >= 1 AND numBedrooms <=2),
+	squareFeet INTEGER
+);
+
 CREATE TABLE Unit
 (
-	uNum VARCHAR(10),
+	uNum  VARCHAR(10),
 	complexID INTEGER,
 		CONSTRAINT Constraint8 PRIMARY KEY (uNum, complexID),
 	bNum INTEGER,
 		CONSTRAINT ForeignKey3 FOREIGN KEY (bNum, complexID) REFERENCES Building(bNum, complexID)
-			ON DELETE CASCADE,
+			ON DELETE CASCADE
+			DEFERRABLE INITIALLY DEFERRED,
 	styleType CHAR(20) NOT NULL,
 	numBedrooms INTEGER NOT NULL,
 		CONSTRAINT ForeignKey4 FOREIGN KEY (styleType, numBedrooms) REFERENCES Style(type, numBedrooms)
-			ON DELETE CASCADE,
+			ON DELETE CASCADE
+			DEFERRABLE INITIALLY DEFERRED,
 		CONSTRAINT Constraint9 CHECK (styleType IN ('Loft', 'Flat', 'Studio')),
 	price INTEGER NOT NULL
 );
@@ -64,20 +77,13 @@ CREATE TABLE Tenant
 		CONSTRAINT Constraint7 CHECK (REGEXP_LIKE(tSSN, '^[[:digit:]]{9}$')),
 	lName CHAR(20) NOT NULL, 
 	fName CHAR(20) NOT NULL, 
+	uNum VARCHAR(10) NOT NULL,
+	complexID INTEGER NOT NULL,
+		CONSTRAINT ForeignKey5 FOREIGN KEY (uNum, complexID) REFERENCES Unit(uNum, complexID)
+			ON DELETE CASCADE
+			DEFERRABLE INITIALLY DEFERRED,
 	dateOfBirth DATE,
-	uNum INTEGER NOT NULL,
-		CONSTRAINT ForeignKey5 FOREIGN KEY (uNum) REFERENCES Unit(uNum)
-			ON DELETE CASCADE,
 	leaseEndDate DATE NOT NULL 
-);
-
-CREATE TABLE Style
-(
-	type CHAR(20),
-	numBedrooms INTEGER,
-		CONSTRAINT Constraint10 PRIMARY KEY (type, numBedrooms),
-		CONSTRAINT Constraint11 CHECK (numBedrooms >= 1 AND numBedrooms <=2),
-	squareFeet INTEGER
 );
 
 SET AUTOCOMMIT 
@@ -102,9 +108,11 @@ INSERT INTO Building VALUES (2, 2, '109283744');
 INSERT INTO Building VALUES (1, 3, '230894755');
 INSERT INTO Building VALUES (2, 3, '209387455');
 
-INSERT INTO Tenant VALUES ('837466129', 'Henderson', 'Alice', TO_DATE('10/10/94', 'MM/DD/YY'), 1, TO_DATE('10/01/18', 'MM/DD/YY'));
-INSERT INTO Tenant VALUES ('908237458', 'Guerrero', 'Cameron', TO_DATE('03/08/92', 'MM/DD/YY'),1, TO_DATE('10/01/18', 'MM/DD/YY'));
-INSERT INTO Tenant VALUES ('198236743', 'Norman', 'Jamie', TO_DATE('09/12/87', 'MM/DD/YY'), 2, TO_DATE('07/01/18', 'MM/DD/YY'));
+INSERT INTO Style VALUES ('Studio', 1, 400);
+INSERT INTO Style VALUES ('Loft', 1, 700);
+INSERT INTO Style VALUES ('Loft', 2, 900);
+INSERT INTO Style VALUES ('Flat', 1, 750);
+INSERT INTO Style VALUES ('Flat', 2, 950);
 
 INSERT INTO Unit VALUES ('S1', 1, 1, 'Studio', 1, 800);
 INSERT INTO Unit VALUES ('S1', 2, 1, 'Studio', 1, 700);
@@ -116,11 +124,9 @@ INSERT INTO Unit VALUES ('F1', 1, 1, 'Flat', 2, 950);
 INSERT INTO Unit VALUES ('F1', 2, 2, 'Flat', 1, 850);
 INSERT INTO Unit VALUES ('F1', 3, 2, 'Flat', 2, 1150);
 
-INSERT INTO Style VALUES ('Studio', 1, 400);
-INSERT INTO Style VALUES ('Loft', 1, 700);
-INSERT INTO Style VALUES ('Loft', 2, 900);
-INSERT INTO Style VALUES ('Flat', 1, 750);
-INSERT INTO Style VALUES ('Flat', 2, 950);
+INSERT INTO Tenant VALUES ('837466129', 'Henderson', 'Alice', 'S1', 1, TO_DATE('10/10/94', 'MM/DD/YY'), TO_DATE('10/01/18', 'MM/DD/YY'));
+INSERT INTO Tenant VALUES ('908237458', 'Guerrero', 'Cameron', 'L1', 2, TO_DATE('03/08/92', 'MM/DD/YY'), TO_DATE('10/01/18', 'MM/DD/YY'));
+INSERT INTO Tenant VALUES ('198236743', 'Norman', 'Jamie', 'F1', 3, TO_DATE('09/12/87', 'MM/DD/YY'), TO_DATE('07/01/18', 'MM/DD/YY'));
 
 COMMIT;
 
